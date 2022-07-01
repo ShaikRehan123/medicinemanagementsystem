@@ -1,0 +1,55 @@
+.welcome .mat-elevation-z8 .mat-table {
+  width: 100%;
+}
+.welcome .mat-elevation-z8 .mat-table button {
+  border: 0;
+  background: transparent;
+  font-size: 25px;
+  color: navy;
+}
+.mat-form-field {
+  width: 100%;
+}
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+.example-button-row {
+  text-align: right;
+}
+.example-button-row button {
+  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+}
+
+.exit_user_data td,
+.exit_user_data th {
+  border: 1px solid #000;
+  padding: 2px 8px;
+}

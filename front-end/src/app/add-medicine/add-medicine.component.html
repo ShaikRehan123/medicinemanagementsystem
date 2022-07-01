@@ -1,0 +1,120 @@
+<div class="main">
+  <div class="">
+    <div class="side_main_content">
+      <div class="side_nav">
+        <app-sidenav></app-sidenav>
+      </div>
+      <div class="content">
+        <div class="header">
+          <app-header></app-header>
+        </div>
+        <!-- show welcome username -->
+        <div class="welcome">
+          <!-- <h3>Welcome {{ username }}</h3> -->
+
+          <form class="my-form" [formGroup]="medicineForm">
+            <!-- //[formGroup]="medicineForm -->
+            <div class="">
+              <h3>Add Medicine</h3>
+              <div class="ngo_wrapper">
+                <ul>
+                  <li>
+                    <div class="grid grid-1">
+                      <!-- <label for="Name"></label> -->
+                      <div class="d-flex flex-column">
+                        <label class="medicine_label">Medicine Name</label>
+                        <input
+                          type="text"
+                          placeholder="Enter Medicine Name"
+                          required
+                          formControlName="medicine_Name"
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="grid grid-2">
+                      <div class="d-flex flex-column">
+                        <label class="medicine_label">Price</label>
+                        <input
+                          type="text"
+                          placeholder="Enter medicine Price"
+                          required
+                          formControlName="medicine_Price"
+                        />
+                      </div>
+                      <div class="d-flex flex-column date_picker">
+                        <label for="">Mfg Date</label>
+                        <input
+                          matInput
+                          [matDatepicker]="mfgPicker"
+                          formControlName="medicine_MfgDate"
+                        />
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="mfgPicker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #mfgPicker></mat-datepicker>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="grid grid-2">
+                      <div class="d-flex flex-column date_picker">
+                        <label for="">Exp Date</label>
+                        <input
+                          matInput
+                          [matDatepicker]="expPicker"
+                          formControlName="medicine_ExpDate"
+                        />
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="expPicker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #expPicker></mat-datepicker>
+                      </div>
+                      <div class="d-flex flex-column">
+                        <label class="medicine_label">Quantity</label>
+                        <input
+                          type="text"
+                          placeholder="Enter Quantity"
+                          required
+                          formControlName="medicine_quantity"
+                        />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="btn-add-reset">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onSubmit()"
+                  >
+                    Add
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    type="reset"
+                    style="margin-right: 0"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    style="display: none"
+                    id="showModalButton"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    You can't see me?
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: hsl(0, 0%, 98%);
+}
+h1:first-of-type {
+  margin-top: 0px;
+  padding-top: 45px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-weight: 200;
+  color: #000;
+  font-weight: 600;
+}
+
+h1:nth-of-type(2) {
+  text-align: center;
+  font-weight: 600;
+  color: hsl(234, 12%, 34%);
+  margin-bottom: 20px;
+}
+
+body > p:first-of-type {
+  font-size: 15px;
+  font-weight: 400;
+  color: hsl(229, 6%, 66%);
+  width: 500px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 1000px;
+  height: 440px;
+  margin: auto;
+  padding-left: 20px;
+}
+.cards a {
+  border-radius: 5px;
+  width: 300px;
+  height: 150px;
+  position: relative;
+  box-shadow: 0px 0px 10px 5px hsl(229deg 6% 66% / 20%);
+  color: hsl(234, 12%, 34%);
+  background-color: #fff;
+  text-decoration: none;
+}
+.cards a fa-icon {
+  font-size: 45px;
+  margin-top: 15px;
+  /* color: #000; */
+}
+.svg-inline--fa {
+  margin-top: 15px;
+}
+
+h3 {
+  margin: 20px 15px 10px 25px;
+  color: hsl(234, 12%, 34%);
+}
+.cards > a > p {
+  font-size: smaller;
+  color: hsl(229, 6%, 66%);
+  margin-left: 25px;
+  margin-right: 25px;
+}
+img {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+}
+.super {
+  border-top: 4px solid hsl(180, 62%, 55%);
+  grid-area: 2/1 / span 2/1;
+  text-align: center;
+}
+.team {
+  border-top: 4px solid hsl(0, 78%, 62%);
+  grid-area: 1/2 / span 2/2;
+  text-align: center;
+}
+.karma {
+  border-top: 4px solid hsl(34, 97%, 64%);
+  grid-area: 3/2 / span 2/2;
+  text-align: center;
+}
+.calc {
+  border-top: 4px solid hsl(212, 86%, 64%);
+  grid-area: 2/3 / span 2/3;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 50px;
+    width: auto;
+  }
+  .cards a {
+    width: 44%;
+    margin: 0 25px;
+  }
+  .cards a:nth-child(odd) {
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 625px) {
+  .cards {
+    height: auto;
+  }
+  .cards a {
+    width: 100%;
+    margin: 15px 25px;
+  }
+  .cards a:nth-child(odd) {
+    margin-right: 25px !important;
+  }
+}
