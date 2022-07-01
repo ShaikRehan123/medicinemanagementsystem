@@ -460,11 +460,12 @@ app.post('/assign_executive', (req, res) => {
 })
 
 // executive - get all donations assigned to him
-app.get('/get_donations_assigned', (req, res) => {
-    const { executiveID } = req.query
+app.post('/get_donations_assigned', (req, res) => {
+    const { executiveID } = req.body
     connection.query(
         // get username,email,city,state,mobile from users where orderID = orderID and execID = executiveID
-        `SELECT user.name as userName,user.email as userEmail,user.city as userCity,user.state as userState,user.mobile as userMobile,donation.id as donationID FROM users as user INNER JOIN donations as donation ON   donation.execID = '${executiveID}' AND user.id = donation.userID `,
+        `SELECT A.id as donationID,B.* FROM donations as A 
+            INNER JOIN users as B ON B.id = A.execID where A.execID = '${executiveID}' AND A.status = 1`,
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -476,6 +477,28 @@ app.get('/get_donations_assigned', (req, res) => {
             res.send({
                 donations: result,
             })
+        }
+    )
+})
+
+app.post('/change_status', (req, res) => {
+    const { donationID } = req.body
+    connection.query(
+        `UPDATE donations SET status = ? WHERE id = ?`,
+        [2, donationID],
+        (err) => {
+            if (err) {
+                console.log(err)
+                res.send({
+                    message: 'Error in assigning executive',
+                })
+                return
+            } else {
+                res.send({
+                    message: 'Changed status successfully',
+                })
+                return
+            }
         }
     )
 })
