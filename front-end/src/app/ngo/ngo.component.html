@@ -1,0 +1,143 @@
+<div class="main">
+  <div class="">
+    <div class="side_main_content">
+      <div class="side_nav">
+        <app-sidenav></app-sidenav>
+      </div>
+      <div class="content">
+        <div class="header">
+          <app-header></app-header>
+        </div>
+        <!-- show welcome username -->
+        <div class="welcome">
+          <!-- <h3>Welcome {{ username }}</h3> -->
+
+          <form class="my-form" [formGroup]="ngoForm">
+            <div class="">
+              <h3>Add NGO</h3>
+              <div class="ngo_wrapper">
+                <ul>
+                  <li>
+                    <div class="grid grid-1">
+                      <!-- <label for="Name"></label> -->
+                      <div class="d-flex flex-column">
+                        <label class="ngo_label">Name</label>
+                        <input
+                          type="text"
+                          placeholder="Enter your Name"
+                          required
+                          formControlName="ngo_name"
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="grid grid-2">
+                      <div class="d-flex flex-column">
+                        <label class="ngo_label">Mobile No</label>
+                        <input
+                          type="text"
+                          placeholder="Enter your Mobile Number"
+                          required
+                          formControlName="ngo_mobileno"
+                        />
+                      </div>
+                      <div class="d-flex flex-column">
+                        <label class="ngo_label">Email</label>
+                        <input
+                          type="email"
+                          placeholder="Enter your Email"
+                          required
+                          formControlName="ngo_email"
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="grid grid-2">
+                      <div class="d-flex flex-column">
+                        <label class="ngo_label">City</label>
+                        <input
+                          type="text"
+                          placeholder="Enter your residency city"
+                          required
+                          formControlName="ngo_city"
+                        />
+                      </div>
+                      <div class="d-flex flex-column">
+                        <label class="ngo_label">State</label>
+                        <input
+                          type="text"
+                          placeholder="Enter your residency state"
+                          required
+                          formControlName="ngo_state"
+                        />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="btn-add-reset">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onSubmit()"
+                  >
+                    Add
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    type="reset"
+                    style="margin-right: 0"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    style="display: none"
+                    id="showModalButton"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    You can't see me?
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade auto_ngo_password"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" style="padding: 30px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p>
+          <span> Username </span>:
+          {{ generatedUsername }}
+        </p>
+        <p>
+          <span> Password </span>:
+          {{ generatedPassword }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<body>
+  <h1 class="mb-5" style="margin-bottom: 45px">Medicine management system</h1>
+
+  <div class="cards">
+    <a class="super" [routerLink]="['/login']" [queryParams]="{ role_id: 1 }">
+      <h3>Admin login</h3>
+      <fa-icon [icon]="faUserGear"></fa-icon>
+      <!-- <p>login</p> -->
+    </a>
+
+    <a class="team" [routerLink]="['/login']" [queryParams]="{ role_id: 2 }">
+      <h3>Executive login</h3>
+      <fa-icon [icon]="faUserTie"></fa-icon>
+      <!-- <p>login</p> -->
+    </a>
+
+    <a class="karma" [routerLink]="['/login']" [queryParams]="{ role_id: 3 }">
+      <h3>NGO login</h3>
+      <fa-icon [icon]="faUsersCog"></fa-icon>
+      <!-- <p>login</p> -->
+    </a>
+
+    <a class="calc" [routerLink]="['/login']" [queryParams]="{ role_id: 4 }">
+      <h3>User login</h3>
+      <fa-icon [icon]="faUserAlt"></fa-icon>
+      <!-- <p>login</p> -->
+    </a>
+  </div>
+</body>
