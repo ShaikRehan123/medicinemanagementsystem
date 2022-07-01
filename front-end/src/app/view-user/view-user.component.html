@@ -1,0 +1,137 @@
+<div class="main">
+  <div class="">
+    <div class="side_main_content">
+      <div class="side_nav">
+        <app-sidenav></app-sidenav>
+      </div>
+      <div class="content">
+        <div class="header">
+          <app-header></app-header>
+        </div>
+        <div class="welcome">
+          <div class="card m-3 p-0 ml-0 mr-0">
+            <div class="card-body" style="padding: 5px">
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="donationData">
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="donationID">
+                    <th mat-header-cell *matHeaderCellDef>DonationID</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.donationID }}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.userName }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="userEmail">
+                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.userEmail }}
+                    </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="userCity">
+                    <th mat-header-cell *matHeaderCellDef>city</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.userCity }}
+                    </td>
+                  </ng-container>
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="userState">
+                    <th mat-header-cell *matHeaderCellDef>State</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.userState }}
+                    </td>
+                  </ng-container>
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="userMobile">
+                    <th mat-header-cell *matHeaderCellDef>Mobile No</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.userMobile }}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Assign</th>
+                    <td mat-cell *matCellDef="let row">
+                      <button mat-button (click)="openDialog(template, row)">
+                        <fa-icon [icon]="faUserTie" mat-button></fa-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="userDisplayedColumns"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: userDisplayedColumns"
+                  ></tr>
+                </table>
+
+                <mat-paginator
+                  [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons
+                  aria-label="Select page of periodic elements"
+                >
+                </mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div>
+    <div class="exit_user_data">
+      <h3>donator details</h3>
+      <table style="width: 100%" border="1">
+        <thead>
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Mobile No</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ rowData.userName }}</td>
+            <td>{{ rowData.userEmail }}</td>
+            <td>{{ rowData.userCity }}</td>
+            <td>{{ rowData.userState }}</td>
+            <td>{{ rowData.userMobile }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <form class="executive_popup mt-3">
+    <mat-form-field appearance="fill">
+      <mat-label>Assign</mat-label>
+      <mat-select [(ngModel)]="assignedValue" name="food">
+        <mat-option
+          *ngFor="let executives of executive"
+          [value]="executives.id"
+          (onSelectionChange)="onSelectionChange($event)"
+        >
+          {{ executives.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="example-button-row text-right">
+      <button mat-button color="primary" (click)="assignExec()">Ok</button>
+      <button mat-button color="warn" mat-dialog-close>Cancel</button>
+    </div>
+  </form>
+</ng-template>

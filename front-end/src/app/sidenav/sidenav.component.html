@@ -1,0 +1,117 @@
+<div
+  class="d-flex flex-column flex-shrink-0 text-white side_nav"
+  style="width: 20%; height: 100vh; position: fixed; overflow-y: auto"
+>
+  <a
+    href="/"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+  >
+    <svg class="bi me-2" width="40" height="32">
+      <use xlink:href="#bootstrap"></use>
+    </svg>
+    <span class="fs-4">Sidebar</span>
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a
+        href="javascript:;"
+        aria-current="page"
+        [routerLink]="['/dashboard']"
+        class="nav-link text-white"
+        [ngClass]="{ active: href == 'dashboard' }"
+      >
+        <svg class="bi me-2" width="16" height="16">
+          <use xlink:href="#home"></use>
+        </svg>
+        Home
+      </a>
+    </li>
+    <div *ngIf="role_id === 1">
+      <li>
+        <a class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Add Data
+        </a>
+        <ul>
+          <li class="nav-link text-white">
+            <a
+              class="nav-link text-white"
+              [ngClass]="{ active: href == 'ngo' }"
+              href="javascript:;"
+              [routerLink]="['/ngo']"
+              >Add NGO</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link text-white"
+              class="nav-link text-white"
+              [ngClass]="{ active: href == 'addmedicine' }"
+              href="javascript:;"
+              [routerLink]="['/addmedicine']"
+              >Add Medicine</a
+            >
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'viewdata' }"
+          href="javascript:;"
+          [routerLink]="['/viewdata']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#table"></use>
+          </svg>
+          View Data
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#grid"></use>
+          </svg>
+          View Reports
+        </a>
+      </li>
+    </div>
+    <div *ngIf="role_id === 2">
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'assignedUsers' }"
+          href="javascript:;"
+          [routerLink]="['/assignedUsers']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          View Assigned Users
+        </a>
+      </li>
+    </div>
+    <div *ngIf="role_id === 3">
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'viewuser' }"
+          href="javascript:;"
+          [routerLink]="['/viewuser']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          view Users
+        </a>
+      </li>
+    </div>
+  </ul>
+</div>
