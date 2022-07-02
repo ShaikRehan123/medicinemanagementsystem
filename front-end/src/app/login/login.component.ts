@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
             $('.form-panel.two').addClass('active');
             $('.form').animate(
               {
+                width: '1000px',
                 height: panelTwo,
               },
               200
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
           $('.form-panel.two').removeClass('active');
           $('.form').animate(
             {
+              width: '600px',
               height: panelOne,
               maxheight: '350px',
             },
