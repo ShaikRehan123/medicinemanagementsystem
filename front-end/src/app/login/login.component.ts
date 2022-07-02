@@ -121,8 +121,7 @@ export class LoginComponent implements OnInit {
 
     // if(this.myusername.includes(''))
     const regex = /^(?=.{8,20}$)[a-zA-Z0-9_]+$/;
-    const pagex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    const pagex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
     if (
       this.name == null ||
@@ -169,12 +168,13 @@ export class LoginComponent implements OnInit {
         email: this.useremail,
         city: this.usercity,
         state: this.userstate,
-        security_question: this.usersecurityquestion,
+        question_answer: this.usersecurityquestion,
         mobile: this.usermobile,
       });
       console.log(res.data);
 
-      // this.toastr.success(res.data.message);
+      this.toastr.success(res.data.message);
+      window.location.reload();
     }
 
     // axios.post('');
@@ -224,12 +224,9 @@ export class LoginComponent implements OnInit {
     // );
 
     if (
-      this.forgotsecurityquestion == null ||
-      this.forgotsecurityquestion.trim() == '' ||
-      this.forgotusername == null ||
-      this.forgotusername.trim() == '' ||
-      this.forgotpassword == null ||
-      this.forgotpassword.trim() == ''
+      this.forgotsecurityquestion != null ||
+      this.forgotusername != null ||
+      this.forgotpassword != null
     ) {
       const res = await axios.post(
         `${environment.apiBaseUrl}/forgot_password`,
@@ -243,6 +240,9 @@ export class LoginComponent implements OnInit {
       if (res.data.message == 'Password reset successful') {
         this.toastr.success('Password reset successful');
         this.cookieService.set('user_data', JSON.stringify(res.data.user));
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         this.toastr.error(res.data.message);
       }
