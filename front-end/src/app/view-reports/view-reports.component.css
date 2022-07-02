@@ -1,0 +1,30 @@
+.welcome .mat-elevation-z8 .mat-table {
+  width: 100%;
+}
+.welcome .mat-elevation-z8 .mat-table button {
+  border: 0;
+  background: transparent;
+  font-size: 25px;
+  color: navy;
+}
+.td.mat-cell {
+  padding: 15px;
+}
+.th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 15px !important;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 15px !important;
+}
+.quantity {
+  outline: none;
+  width: 200px;
+  height: 40px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  font-size: 20px;
+}

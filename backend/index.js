@@ -326,7 +326,7 @@ app.post('/new_order', (req, res) => {
 app.get('/get_orders', (req, res) => {
     const { userID } = req.query
     connection.query(
-        `SELECT medicines.name as medicineName, orders.id as orderID,
+        `SELECT medicines.name as medicineName, orders.id as orderID,medicines.id as medicineID,
         (medicines.price * orders.medQuantity) as medicinePrice,
         medicines.mfg_date as medicineMfg_Date, medicines.exp_date medicineExp_Date, orders.medQuantity as purchasedQuantity FROM medicines INNER JOIN orders ON medicines.id = orders.medID WHERE orders.userID = '${userID}'`,
         (err, result) => {
@@ -374,7 +374,7 @@ app.get('/get_medicines', (req, res) => {
 
 // user - donate medicine
 app.post('/donate_medicine', (req, res) => {
-    const { userID, donatedMedicinesOrderID } = req.body
+    const { userID, donatedMedicinesOrderID, donatedMedicineIDS } = req.body
     donatedMedicinesOrderID.forEach((orderID) => {
         connection.query(
             // delete order from orders table where orderID = orderID and userID = userID
@@ -396,10 +396,12 @@ app.post('/donate_medicine', (req, res) => {
     const stringifiedDonatedMedicinesOrderID = JSON.stringify(
         donatedMedicinesOrderID
     )
+    const stringifiedDonatedMedicineIDS = JSON.stringify(donatedMedicineIDS)
     connection.query(
-        `INSERT INTO donations (userID , donatedMedicines	,status , dateOfDonation) VALUES (? , ? , ? , ?)`,
+        `INSERT INTO donations (userID ,medicineIDS, donatedMedicines	,status , dateOfDonation) VALUES (?,? , ? , ? , ?)`,
         [
             userID,
+            stringifiedDonatedMedicineIDS,
             stringifiedDonatedMedicinesOrderID,
             'pending',
             dayjs().format('YYYY-MM-DD'),
@@ -536,30 +538,39 @@ app.post('/change_status', (req, res) => {
 // admin should get all of these between two dates
 // Date of donation, Medicine, User id, User name, Ngo Id, Ngo name, Executive id, Executive name who collected the medicine should be displayed.
 
-// app.get('/show_report', (req, res) => {
-//     const { startDate, endDate } = req.query
-//     connection.query(
-//         `SELECT donations.dateOfDonation, FROM donations `,
-//         (err, result) => {
-//             if (err) {
-//                 console.log(err)
-//                 res.send({
-//                     message: 'Server error',
-//                 })
-//                 return
-//             }
-//             if (result.length === 0) {
-//                 res.send({
-//                     message: 'No donations found',
-//                 })
-//                 return
-//             }
-//             res.send({
-//                 report: result,
-//             })
-//         }
-//     )
-// })
+app.get('/show_report', (req, res) => {
+    const { startDate, endDate } = req.query
+    connection.query(
+        `SELECT A.medicineIDS, a.userID , a.dateOfDonation,a.execID, a.ngoID,B.name as username, C.name as ExeName, D.name as ngoName FROM donations as A 
+            INNER JOIN users as B on B.id = A.userID 
+            INNER JOIN users as C on C.id = A.execID
+            INNER JOIN users as D on D.id = A.ngoID
+            WHERE dateOfDonation BETWEEN '${startDate}' AND '${endDate}' `,
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                res.send({
+                    message: 'Server error',
+                    error: err,
+                })
+                return
+            }
+            if (result.length === 0) {
+                res.send({
+                    message: 'No data found',
+                })
+                return
+            }
+            // map through the result and parse the medicineIDS to an array
+            res.send({
+                report: result.map((report) => {
+                    report.medicineIDS = JSON.parse(report.medicineIDS)
+                    return report
+                }),
+            })
+        }
+    )
+})
 
 app.listen(PORT, (err) => {
     if (err) {
