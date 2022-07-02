@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   username: string = 'Municipal';
   email: string = '';
+  public role_id: number = 0;
   logout = () => {
     this.cookieService.delete('user_data');
     this.router.navigate(['/']);

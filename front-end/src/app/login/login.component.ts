@@ -231,6 +231,8 @@ export class LoginComponent implements OnInit {
       this.forgotpassword == null ||
       this.forgotpassword.trim() == ''
     ) {
+      this.toastr.error('you should fill all fields');
+    } else {
       const res = await axios.post(
         `${environment.apiBaseUrl}/forgot_password`,
         {
@@ -246,8 +248,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.toastr.error(res.data.message);
       }
-    } else {
-      this.toastr.error('you should fill all fields');
     }
   };
 

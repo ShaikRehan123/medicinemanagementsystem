@@ -38,6 +38,24 @@
         <div class="dropdown-divider"></div>
         <ul class="list-unstyled">
           <li>
+            <a
+              class="dropdown-item"
+              class="nav-link text-white"
+              [routerLink]="['/Profile']"
+            >
+              <span class="mr-2">
+                <svg
+                  class="mds-icon userprofile"
+                  id="icon-settings"
+                  viewBox="0 0 24 24"
+                >
+                  <title>icon-profile</title>
+                  <circle cx="12" cy="8" r="5" />
+                  <path d="M3,21H3a8,8,0,0,1,8-8h2a8,8,0,0,1,8,8h0" />
+                </svg>
+              </span>
+              Profile
+            </a>
             <a class="dropdown-item" (click)="logout()">
               <span class="mr-2">
                 <svg
