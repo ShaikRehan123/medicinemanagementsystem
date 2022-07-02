@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  public forgothide: boolean = false;
   ngOnInit(): void {
     if (this.cookieService.get('user_data') != '') {
       this.toastr.warning('You are already logged in', 'Warning', {
@@ -28,16 +29,17 @@ export class LoginComponent implements OnInit {
       });
       (function ($) {
         var panelOne = $('.form-panel.two').height(),
-          panelTwo = $('.form-panel.two')[0].scrollHeight;
+          panelTwo = $('.form-panel.two')[0].scrollHeight,
+          panelThree = $('.form-panel.three')[0].scrollHeight;
 
         $('.form-panel.two')
           .not('.form-panel.two.active')
           .on('click', function (e) {
             e.preventDefault();
-
             $('.form-toggle').addClass('visible');
             $('.form-panel.one').addClass('hidden');
             $('.form-panel.two').addClass('active');
+            $('.form-panel.three').addClass('hidden');
             $('.form').animate(
               {
                 width: '1000px',
@@ -52,11 +54,28 @@ export class LoginComponent implements OnInit {
           $(this).removeClass('visible');
           $('.form-panel.one').removeClass('hidden');
           $('.form-panel.two').removeClass('active');
+          $('.form-panel.three').removeClass('active');
           $('.form').animate(
             {
               width: '600px',
               height: panelOne,
               maxheight: '350px',
+            },
+            200
+          );
+        });
+        $('.form-recovery').on('click', function (e) {
+          e.preventDefault();
+          $(this).addClass('visible');
+          $('.form-toggle').addClass('visible');
+          $('.form-panel.one').addClass('hidden');
+          $('.form-panel.two').addClass('hidden');
+          $('.form-panel.three').addClass('active');
+
+          $('.form').animate(
+            {
+              width: '600px',
+              height: panelThree,
             },
             200
           );
@@ -80,6 +99,11 @@ export class LoginComponent implements OnInit {
   loginusername: string = '';
   loginpassword: string = '';
   role_id: number = 4;
+  //forgot formconroll
+  public forgotFrom: FormGroup;
+  forgotsecurityquestion: string = '';
+  forgotusername: string = '';
+  forgotpassword: string = '';
   register = async () => {
     console.log(this.registerForm.value);
     // console.log('I got called');
@@ -101,6 +125,20 @@ export class LoginComponent implements OnInit {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
     if (
+      this.name == null ||
+      this.myusername == null ||
+      this.password == null ||
+      this.cpassword == null ||
+      this.useremail == null ||
+      this.usercity == null ||
+      this.userstate == null ||
+      this.usersecurityquestion == null ||
+      this.usermobile == null
+    ) {
+      this.toastr.warning('Please fill all the fields', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (
       this.name.trim() == '' ||
       this.myusername.trim() == '' ||
       this.password.trim() == '' ||
@@ -173,6 +211,46 @@ export class LoginComponent implements OnInit {
     }
   };
 
+  forgotpass = async () => {
+    this.forgotsecurityquestion = this.forgotFrom.get(
+      'forgotsecurityquestion'
+    )?.value;
+    this.forgotusername = this.forgotFrom.get('forgotusername')?.value;
+    this.forgotpassword = this.forgotFrom.get('forgotpassword')?.value;
+    // console.log(
+    //   this.forgotsecurityquestion,
+    //   this.forgotusername,
+    //   this.forgotpassword
+    // );
+
+    if (
+      this.forgotsecurityquestion == null ||
+      this.forgotsecurityquestion.trim() == '' ||
+      this.forgotusername == null ||
+      this.forgotusername.trim() == '' ||
+      this.forgotpassword == null ||
+      this.forgotpassword.trim() == ''
+    ) {
+      const res = await axios.post(
+        `${environment.apiBaseUrl}/forgot_password`,
+        {
+          question_answer: this.forgotsecurityquestion,
+          username: this.forgotusername,
+          password: this.forgotpassword,
+        }
+      );
+      console.log(res.data);
+      if (res.data.message == 'Password reset successful') {
+        this.toastr.success('Password reset successful');
+        this.cookieService.set('user_data', JSON.stringify(res.data.user));
+      } else {
+        this.toastr.error(res.data.message);
+      }
+    } else {
+      this.toastr.error('you should fill all fields');
+    }
+  };
+
   constructor(
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
@@ -194,6 +272,11 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
       loginusername: new FormControl(),
       loginpassword: new FormControl(),
+    });
+    this.forgotFrom = new FormGroup({
+      forgotsecurityquestion: new FormControl(),
+      forgotusername: new FormControl(),
+      forgotpassword: new FormControl(),
     });
   }
   // set role_id to role_id from query params on ngViewInit
