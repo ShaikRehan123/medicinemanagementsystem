@@ -1,0 +1,9 @@
+.mat-elevation-z8 table {
+  width: 100%;
+}
+.mat-elevation-z8 table th.mat-header-cell {
+  background-color: cadetblue;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
