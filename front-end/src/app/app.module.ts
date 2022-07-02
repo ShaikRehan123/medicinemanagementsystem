@@ -28,6 +28,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewassignedUsersComponent } from './viewassigned-users/viewassigned-users.component';
+import { BuymedicineComponent } from './buymedicine/buymedicine.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +44,9 @@ import { ViewassignedUsersComponent } from './viewassigned-users/viewassigned-us
     AddMedicineComponent,
     ViewUserComponent,
     ViewassignedUsersComponent,
+    BuymedicineComponent,
+    MyordersComponent,
+    DonateMedicinesComponent,
   ],
   imports: [
     BrowserModule,
