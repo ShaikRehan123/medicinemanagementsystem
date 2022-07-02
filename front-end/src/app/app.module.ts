@@ -31,6 +31,7 @@ import { ViewassignedUsersComponent } from './viewassigned-users/viewassigned-us
 import { BuymedicineComponent } from './buymedicine/buymedicine.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.component';
+import { ViewReportsComponent } from './view-reports/view-reports.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.co
     BuymedicineComponent,
     MyordersComponent,
     DonateMedicinesComponent,
+    ViewReportsComponent,
   ],
   imports: [
     BrowserModule,

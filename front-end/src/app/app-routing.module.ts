@@ -11,6 +11,7 @@ import { ViewassignedUsersComponent } from './viewassigned-users/viewassigned-us
 import { BuymedicineComponent } from './buymedicine/buymedicine.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.component';
+import { ViewReportsComponent } from './view-reports/view-reports.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'buymedicine', component: BuymedicineComponent },
   { path: 'myorders', component: MyordersComponent },
   { path: 'donatemedicines', component: DonateMedicinesComponent },
+  { path: 'viewreports', component: ViewReportsComponent },
 ];
 
 @NgModule({

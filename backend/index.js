@@ -362,7 +362,7 @@ app.post('/donate_medicine', (req, res) => {
                     // stop further execution
                     return
                 } else {
-                    console.log('deleted')
+                    // console.log('deleted')
                 }
             }
         )
@@ -460,8 +460,8 @@ app.post('/assign_executive', (req, res) => {
 })
 
 // executive - get all donations assigned to him
-app.post('/get_donations_assigned', (req, res) => {
-    const { executiveID } = req.body
+app.get('/get_donations_assigned', (req, res) => {
+    const { executiveID } = req.query
     connection.query(
         // get username,email,city,state,mobile from users where orderID = orderID and execID = executiveID
         `SELECT user.name as userName,user.email as userEmail,user.city as userCity,user.state as userState,user.mobile as userMobile,donation.id as donationID FROM users as user INNER JOIN donations as donation   ON user.id = donation.userID AND donation.execID = '${executiveID}' AND donation.status = 1`,
