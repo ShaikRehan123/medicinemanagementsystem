@@ -45,7 +45,7 @@ ul li ul {
   display: block;
   margin: 12px 0px;
   padding: 0;
-  background: #000;
+  background: #0d98c7;
   /* border: 2px solid #f7c833;
   border-right: 2px solid #f89329;
   border-bottom: 2px solid #f89329; */
@@ -80,7 +80,9 @@ ul li:hover a {
 ul li:hover ul {
   visibility: visible;
   opacity: 1;
-  box-shadow: 0px 3px 5px 2px #ebecf1;
+  position: relative;
+  box-shadow: 0px 1px 5px 2px #15566c;
+  margin: 5px 0 0;
 }
 ul li:hover ul li a {
   color: #f9f8fd;
@@ -109,4 +111,8 @@ ul li:hover ul li a {
   font-size: 36px;
   text-align: center;
   margin-top: 250px;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #0d98c7;
 }
