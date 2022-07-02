@@ -46,9 +46,6 @@
       class="form-panel two"
       [ngStyle]="{ display: role_id == 4 ? 'block' : 'none' }"
     >
-      <div class="form-header">
-        <h1></h1>
-      </div>
       <div class="form-content">
         <form [formGroup]="registerForm">
           <div class="form-group">
@@ -69,6 +66,16 @@
               name="username"
               required="required"
               formControlName="username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="useremail">EMAIL</label>
+            <input
+              type="email"
+              id="useremail"
+              name="useremail"
+              required="required"
+              formControlName="useremail"
             />
           </div>
           <div class="form-group">
