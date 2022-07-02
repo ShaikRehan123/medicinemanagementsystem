@@ -46,6 +46,7 @@ export class ViewUserComponent implements OnInit, AfterViewInit {
         this.toastr.success('Executive assigned successfully');
         // close the dialog
         this.dialog.closeAll();
+        this.getNgoData();
       } else {
         this.toastr.error(res.data.message);
       }

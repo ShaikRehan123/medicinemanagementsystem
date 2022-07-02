@@ -37,6 +37,7 @@ export class ViewassignedUsersComponent implements OnInit, AfterViewInit {
 
     if (res.data.message == 'Changed status successfully') {
       this.toastr.success('Medicine collected successfully');
+      this.getNgoData();
     } else {
       this.toastr.error(res.data.message);
     }
