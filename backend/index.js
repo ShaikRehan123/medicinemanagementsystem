@@ -464,8 +464,7 @@ app.post('/get_donations_assigned', (req, res) => {
     const { executiveID } = req.body
     connection.query(
         // get username,email,city,state,mobile from users where orderID = orderID and execID = executiveID
-        `SELECT A.id as donationID,B.* FROM donations as A 
-            INNER JOIN users as B ON B.id = A.execID where A.execID = '${executiveID}' AND A.status = 1`,
+        `SELECT user.name as userName,user.email as userEmail,user.city as userCity,user.state as userState,user.mobile as userMobile,donation.id as donationID FROM users as user INNER JOIN donations as donation   ON user.id = donation.userID AND donation.execID = '${executiveID}' AND donation.status = 1`,
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -474,8 +473,12 @@ app.post('/get_donations_assigned', (req, res) => {
                 })
                 return
             }
+            // map through the result array and add actions to each object
             res.send({
-                donations: result,
+                donations: result.map((donation) => {
+                    donation.action = ''
+                    return donation
+                }),
             })
         }
     )
