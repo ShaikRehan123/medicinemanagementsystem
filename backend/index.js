@@ -278,12 +278,15 @@ app.post('/ngo_change_password', (req, res) => {
 app.post('/new_order', (req, res) => {
     const { userID, medID, quantity } = req.body
     // ther is enough medicine in stock
+    // console.log(userID, medID, quantity)
     connection.query(
         `SELECT quantity FROM medicines WHERE id = '${medID}'`,
         (err, result) => {
             if (err) {
                 console.log(err)
+                return
             }
+            // console.log(result)
             if (result[0].quantity >= quantity) {
                 // decrease medicine quantity and place order
                 connection.query(
@@ -323,7 +326,9 @@ app.post('/new_order', (req, res) => {
 app.get('/get_orders', (req, res) => {
     const { userID } = req.query
     connection.query(
-        `SELECT orders.id as orderID ,medicines.name as medicineName, medicines.price as  medicinePrice, medicines.mfg_date as medicineMfg_Date, medicines.exp_date medicineExp_Date, orders.medQuantity as purchasedQuantity FROM medicines INNER JOIN orders ON medicines.id = orders.medID WHERE orders.userID = '${userID}'`,
+        `SELECT medicines.name as medicineName, orders.id as orderID,
+        (medicines.price * orders.medQuantity) as medicinePrice,
+        medicines.mfg_date as medicineMfg_Date, medicines.exp_date medicineExp_Date, orders.medQuantity as purchasedQuantity FROM medicines INNER JOIN orders ON medicines.id = orders.medID WHERE orders.userID = '${userID}'`,
         (err, result) => {
             if (err) {
                 console.log(err)
@@ -334,7 +339,11 @@ app.get('/get_orders', (req, res) => {
                 if (result.length > 0) {
                     res.send({
                         message: 'Orders found',
-                        orders: result,
+                        // map through the orders and add select fields to the result
+                        orders: result.map((donation) => {
+                            donation.select = ''
+                            return donation
+                        }),
                     })
                 } else {
                     res.send({
@@ -344,6 +353,23 @@ app.get('/get_orders', (req, res) => {
             }
         }
     )
+})
+
+// user - get all medicines
+app.get('/get_medicines', (req, res) => {
+    connection.query(`SELECT * FROM medicines`, (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.send({
+            message: 'Medicines found',
+            // map through the result and add action to each medicine
+            medicines: result.map((medicine) => {
+                medicine.action = ''
+                return medicine
+            }),
+        })
+    })
 })
 
 // user - donate medicine
@@ -460,8 +486,8 @@ app.post('/assign_executive', (req, res) => {
 })
 
 // executive - get all donations assigned to him
-app.post('/get_donations_assigned', (req, res) => {
-    const { executiveID } = req.body
+app.get('/get_donations_assigned', (req, res) => {
+    const { executiveID } = req.query
     connection.query(
         // get username,email,city,state,mobile from users where orderID = orderID and execID = executiveID
         `SELECT user.name as userName,user.email as userEmail,user.city as userCity,user.state as userState,user.mobile as userMobile,donation.id as donationID FROM users as user INNER JOIN donations as donation   ON user.id = donation.userID AND donation.execID = '${executiveID}' AND donation.status = 1`,
@@ -505,6 +531,35 @@ app.post('/change_status', (req, res) => {
         }
     )
 })
+
+// admin - show report
+// admin should get all of these between two dates
+// Date of donation, Medicine, User id, User name, Ngo Id, Ngo name, Executive id, Executive name who collected the medicine should be displayed.
+
+// app.get('/show_report', (req, res) => {
+//     const { startDate, endDate } = req.query
+//     connection.query(
+//         `SELECT donations.dateOfDonation, FROM donations `,
+//         (err, result) => {
+//             if (err) {
+//                 console.log(err)
+//                 res.send({
+//                     message: 'Server error',
+//                 })
+//                 return
+//             }
+//             if (result.length === 0) {
+//                 res.send({
+//                     message: 'No donations found',
+//                 })
+//                 return
+//             }
+//             res.send({
+//                 report: result,
+//             })
+//         }
+//     )
+// })
 
 app.listen(PORT, (err) => {
     if (err) {

@@ -31,6 +31,7 @@ import { ViewassignedUsersComponent } from './viewassigned-users/viewassigned-us
 import { BuymedicineComponent } from './buymedicine/buymedicine.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,7 @@ import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.co
     MatDialogModule,
     MatSelectModule,
     MatButtonModule,
+    MatCheckboxModule,
   ],
   providers: [CookieService, Title],
   bootstrap: [AppComponent],
