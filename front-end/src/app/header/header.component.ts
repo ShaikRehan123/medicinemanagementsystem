@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   username: string = 'Municipal';
+  email: string = '';
   logout = () => {
     this.cookieService.delete('user_data');
     this.router.navigate(['/']);
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
     if (this.cookieService.get('user_data') == '') {
     } else {
       this.username = JSON.parse(this.cookieService.get('user_data'))['name'];
+      this.email = JSON.parse(this.cookieService.get('user_data'))['email'];
     }
     // this.username = JSON.parse(this.cookieService.get('user_data'))['name'];
   }
