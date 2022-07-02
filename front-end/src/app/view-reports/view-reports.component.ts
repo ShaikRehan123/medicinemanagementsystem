@@ -52,11 +52,11 @@ export class ViewReportsComponent implements OnInit {
   }
   getNgoData() {
     this.getOrders().subscribe((data: any) => {
-      this.reportsDataSource = new MatTableDataSource<any>(data['reports']);
+      this.reportsDataSource = new MatTableDataSource<any>(data['report']);
       this.reportsDataSource.paginator = this.paginator;
       this.reportsDataSource.sort = this.sort;
       // this.ngoData = data['ngo'];
-      console.log(data['reports']);
+      console.log(data['report']);
 
       return data;
       // console.log(this.ngoData);
