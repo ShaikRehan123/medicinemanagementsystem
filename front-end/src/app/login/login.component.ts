@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 import * as jQuery from 'jquery';
 import axios from 'axios';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -253,7 +253,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private formBuilder: FormBuilder,
     private router: ActivatedRoute,
     private cookieService: CookieService,
     private routingRouter: Router
