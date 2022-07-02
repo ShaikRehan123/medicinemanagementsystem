@@ -2,14 +2,11 @@
   class="d-flex flex-column flex-shrink-0 text-white side_nav"
   style="width: 20%; height: 100vh; position: fixed; overflow-y: auto"
 >
-  <a
-    href="/"
-    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-  >
+  <a class="d-flex align-items-center mb-3 mt-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <svg class="bi me-2" width="40" height="32">
       <use xlink:href="#bootstrap"></use>
     </svg>
-    <span class="fs-4">Sidebar</span>
+    <span class="fs-4">Admin Panel</span>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
@@ -110,6 +107,50 @@
             <use xlink:href="#home"></use>
           </svg>
           view Users
+        </a>
+      </li>
+    </div>
+    <div *ngIf="role_id === 4">
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'buymedicine' }"
+          href="javascript:;"
+          [routerLink]="['/buymedicine']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Buy Medicine
+        </a>
+      </li>
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'myorders' }"
+          href="javascript:;"
+          [routerLink]="['/myorders']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          My Orders
+        </a>
+      </li>
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'donatemedicines' }"
+          href="javascript:;"
+          [routerLink]="['/donatemedicines']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Donate Medicines
         </a>
       </li>
     </div>
