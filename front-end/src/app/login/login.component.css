@@ -12,7 +12,6 @@ body {
     rgba(66, 245, 189, 0.4) 100%
   );
   height: 100%;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +28,7 @@ body {
   align-items: center;
   justify-content: center;
   /* height: 100%; */
+  padding: 60px 0 !important;
 }
 
 .overlay,
@@ -121,13 +121,14 @@ body {
   border: 0;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 12px 20px;
+  padding: 8px 20px;
   color: rgba(0, 0, 0, 0.6);
   font-family: inherit;
   font-size: inherit;
   font-weight: 500;
   line-height: inherit;
   transition: 0.3s ease;
+  margin-top: 0 !important;
 }
 .form-group input:focus {
   color: rgba(0, 0, 0, 0.8);
@@ -241,6 +242,22 @@ body {
   padding: 60px calc(10% + 15px) 60px 60px;
   transition: 0.3s ease;
   cursor: pointer;
+}
+.form-panel.three {
+  z-index: 6;
+  position: absolute;
+  top: 100%;
+  bottom: 0;
+  background: #4285f4;
+  width: 100%;
+  padding: 60px calc(10% + 15px) 60px 60px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.form-panel.three.active {
+  top: 0%;
+  box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+  cursor: default;
 }
 .form-panel.two:before,
 .form-panel.two:after {
