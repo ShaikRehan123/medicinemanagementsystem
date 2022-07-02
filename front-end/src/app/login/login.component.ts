@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
           $('.form').animate(
             {
               height: panelOne,
+              maxheight: '350px',
             },
             200
           );
@@ -67,27 +68,56 @@ export class LoginComponent implements OnInit {
   myusername: string = '';
   password: string = '';
   cpassword: string = '';
+  useremail: string = '';
+  usercity: string = '';
+  userstate: string = '';
+  usersecurityquestion: string = '';
+  usermobile: string = '';
   //login formconroll
   public loginForm: FormGroup;
   loginusername: string = '';
   loginpassword: string = '';
   role_id: number = 4;
   register = async () => {
-    // console.log(environment.apiBaseUrl);
+    console.log(this.registerForm.value);
     // console.log('I got called');
     this.name = this.registerForm.get('name')?.value;
     this.myusername = this.registerForm.get('username')?.value;
     this.password = this.registerForm.get('password')?.value;
     this.cpassword = this.registerForm.get('cpassword')?.value;
+    this.useremail = this.registerForm.get('useremail')?.value;
+    this.usercity = this.registerForm.get('usercity')?.value;
+    this.userstate = this.registerForm.get('userstate')?.value;
+    this.usersecurityquestion = this.registerForm.get(
+      'usersecurityquestion'
+    )?.value;
+    this.usermobile = this.registerForm.get('usermobile')?.value;
 
     // if(this.myusername.includes(''))
     const regex = /^(?=.{8,20}$)[a-zA-Z0-9_]+$/;
     const pagex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-    if (regex.test(this.myusername) == false) {
-      this.toastr.error('this error');
+
+    if (
+      this.name.trim() == '' ||
+      this.myusername.trim() == '' ||
+      this.password.trim() == '' ||
+      this.cpassword.trim() == '' ||
+      this.useremail.trim() == '' ||
+      this.usercity.trim() == '' ||
+      this.userstate.trim() == '' ||
+      this.usersecurityquestion.trim() == '' ||
+      this.usermobile.trim() == ''
+    ) {
+      this.toastr.warning('Please fill all the fields', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (regex.test(this.myusername) == false) {
+      this.toastr.error('Invalid username');
+    } else if (this.usermobile.length != 10) {
+      this.toastr.error('Invalid mobile number');
     } else if (pagex.test(this.password) == false) {
-      this.toastr.error('this password error');
+      this.toastr.error('Invalid Password');
     } else if (this.cpassword !== this.password) {
       this.toastr.error('Password and confirm Password should be same');
     } else {
@@ -96,25 +126,15 @@ export class LoginComponent implements OnInit {
         username: this.myusername,
         password: this.password,
         name: this.name,
+        email: this.useremail,
+        city: this.usercity,
+        state: this.userstate,
+        security_question: this.usersecurityquestion,
+        mobile: this.usermobile,
       });
       console.log(res.data);
 
       // this.toastr.success(res.data.message);
-      if (res.data.message == 'Registration successful') {
-        this.toastr.success('Registration successful');
-        var panelOne = $('.form-panel.two').height();
-        $('.form-toggle').removeClass('visible');
-        $('.form-panel.one').removeClass('hidden');
-        $('.form-panel.two.four').removeClass('active');
-        $('.form').animate(
-          {
-            height: panelOne,
-          },
-          200
-        );
-      } else {
-        this.toastr.error(res.data.message);
-      }
     }
 
     // axios.post('');
@@ -136,6 +156,7 @@ export class LoginComponent implements OnInit {
       const res = await axios.post(`${environment.apiBaseUrl}/login`, {
         username: this.loginusername,
         password: this.loginpassword,
+
         role_id: this.role_id,
       });
       console.log(res.data);
@@ -160,6 +181,11 @@ export class LoginComponent implements OnInit {
     this.registerForm = new FormGroup({
       name: new FormControl(),
       username: new FormControl(),
+      useremail: new FormControl(),
+      usermobile: new FormControl(),
+      usercity: new FormControl(),
+      userstate: new FormControl(),
+      usersecurityquestion: new FormControl(),
       password: new FormControl(),
       cpassword: new FormControl(),
     });
