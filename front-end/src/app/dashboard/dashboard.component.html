@@ -68,6 +68,14 @@
             <h3>Welcome {{ username }}</h3>
           </div>
         </div>
+        <div class="welcome">
+          <div
+            class="chnagespassowrd"
+            *ngIf="role_id === 3 && is_first_login != true"
+          >
+            <h3>Welcome {{ username }}</h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>

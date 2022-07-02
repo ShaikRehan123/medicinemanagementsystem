@@ -42,6 +42,13 @@ export class DonateMedicinesComponent implements OnInit {
       donatedMedicinesOrderID: this.selection.selected.map(
         (medicine) => medicine.orderID
       ),
+
+      // get unique of the selected medicines
+      donatedMedicineIDS: [
+        ...new Set(
+          this.selection.selected.map((medicine) => medicine.medicineName)
+        ),
+      ],
     };
     console.log(body);
     const url = environment['apiBaseUrl'] + '/donate_medicine';
