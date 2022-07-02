@@ -110,5 +110,49 @@
         </a>
       </li>
     </div>
+    <div *ngIf="role_id === 4">
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'buymedicine' }"
+          href="javascript:;"
+          [routerLink]="['/buymedicine']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Buy Medicine
+        </a>
+      </li>
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'myorders' }"
+          href="javascript:;"
+          [routerLink]="['/myorders']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          My Orders
+        </a>
+      </li>
+      <li>
+        <a
+          href="javascript:;"
+          class="nav-link text-white"
+          [ngClass]="{ active: href == 'donatemedicines' }"
+          href="javascript:;"
+          [routerLink]="['/donatemedicines']"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Donate Medicines
+        </a>
+      </li>
+    </div>
   </ul>
 </div>
