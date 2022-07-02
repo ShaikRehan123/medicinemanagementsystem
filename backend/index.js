@@ -572,6 +572,29 @@ app.get('/show_report', (req, res) => {
     )
 })
 
+// edit profile - user, ngo
+app.post('/edit_profile', (req, res) => {
+    const { userID, name, email, city, state, mobile } = req.body
+    connection.query(
+        `UPDATE users SET name = ? , email = ? , city = ? , state = ? , mobile = ? WHERE id = ?`,
+        [name, email, city, state, mobile, userID],
+        (err) => {
+            if (err) {
+                console.log(err)
+                res.send({
+                    message: 'Error in editing profile',
+                })
+                return
+            } else {
+                res.send({
+                    message: 'Profile edited successfully',
+                })
+                return
+            }
+        }
+    )
+})
+
 app.listen(PORT, (err) => {
     if (err) {
         console.log(err)
