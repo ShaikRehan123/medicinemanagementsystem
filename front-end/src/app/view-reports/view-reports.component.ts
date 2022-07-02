@@ -13,39 +13,59 @@ import { environment } from 'src/environments/environment';
 export class ViewReportsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: any = MatSort;
-  userDataSource = new MatTableDataSource<any>([]);
+  reportsDataSource = new MatTableDataSource<any>([]);
 
-  userDisplayedColumns: any[] = [
-    { id: 0, name: 'Available' },
-    { id: 1, name: 'Ready' },
-    { id: 2, name: 'Started' },
+  reportsDisplayedColumns: any = [
+    'medicineIDS',
+    'userID',
+    'username',
+    'execID',
+    'ExeName',
+    'ngoID',
+    'ngoName',
+    'dateOfDonation',
   ];
-  cookieservice: any;
 
+  getOrders(endDate?: any, startDate?: any) {
+    if (endDate && startDate) {
+      return this.http.get(
+        environment['apiBaseUrl'] +
+          `/show_report?startDate=${startDate}&endDate=${endDate}`
+      );
+    } else {
+      // get yesterday date as start date and end date as tomorrow date and format it as yyyy-mm-dd
+      const startDate = new Date(new Date().setDate(new Date().getDate() - 1))
+        .toISOString()
+        .split('T')[0];
+      const endDate = new Date(new Date().setDate(new Date().getDate() + 1))
+        .toISOString()
+        .split('T')[0];
+      console.log(
+        environment['apiBaseUrl'] +
+          `/show_report?startDate=${startDate}&endDate=${endDate}`
+      );
+      return this.http.get(
+        environment['apiBaseUrl'] +
+          `/show_report?startDate=${startDate}&endDate=${endDate}`
+      );
+    }
+  }
+  getNgoData() {
+    this.getOrders().subscribe((data: any) => {
+      this.reportsDataSource = new MatTableDataSource<any>(data['reports']);
+      this.reportsDataSource.paginator = this.paginator;
+      this.reportsDataSource.sort = this.sort;
+      // this.ngoData = data['ngo'];
+      console.log(data['reports']);
+
+      return data;
+      // console.log(this.ngoData);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.getNgoData();
+  }
   constructor(private http: HttpClient) {}
-  // getOrders() {
-  //   return this.http.get(
-  //     environment['apiBaseUrl'] +
-  //       `/get_donations_assigned?executiveID=${
-  //         JSON.parse(this.cookieservice.get('user_data'))['id']
-  //       }`
-  //   );
-  // }
-  // getNgoData() {
-  //   this.getOrders().subscribe((data: any) => {
-  //     this.userDisplayedColumns = new MatTableDataSource<any>(data['donations']);
-  //     this.userDisplayedColumns.paginator = this.paginator;
-  //     this.userDisplayedColumns.sort = this.sort;
-
-  //     console.log(data['donations']);
-
-  //     return data;
-
-  //   });
-  // }
-
-  // ngAfterViewInit(): void {
-  //   this.getNgoData();
-  // }
   ngOnInit(): void {}
 }
