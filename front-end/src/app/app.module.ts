@@ -33,6 +33,7 @@ import { MyordersComponent } from './myorders/myorders.component';
 import { DonateMedicinesComponent } from './donate-medicines/donate-medicines.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ViewReportsComponent } from './view-reports/view-reports.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { ViewReportsComponent } from './view-reports/view-reports.component';
     MyordersComponent,
     DonateMedicinesComponent,
     ViewReportsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
