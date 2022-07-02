@@ -87,10 +87,10 @@ export class ViewUserComponent implements OnInit, AfterViewInit {
 
   public userDisplayedColumns: string[] = [
     'donationID',
-    'userCity',
+    'userName',
     'userEmail',
     'userMobile',
-    'userName',
+    'userCity',
     'userState',
     'actions',
   ];

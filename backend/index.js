@@ -388,7 +388,7 @@ app.post('/donate_medicine', (req, res) => {
                     // stop further execution
                     return
                 } else {
-                    console.log('deleted')
+                    // console.log('deleted')
                 }
             }
         )
