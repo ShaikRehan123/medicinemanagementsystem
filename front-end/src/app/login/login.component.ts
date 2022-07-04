@@ -224,9 +224,9 @@ export class LoginComponent implements OnInit {
     // );
 
     if (
-      this.forgotsecurityquestion != null ||
-      this.forgotusername != null ||
-      this.forgotpassword != null
+      this.forgotsecurityquestion == null ||
+      this.forgotusername == null ||
+      this.forgotpassword == null
     ) {
       this.toastr.error('you should fill all fields');
     } else {
@@ -239,9 +239,9 @@ export class LoginComponent implements OnInit {
         }
       );
       console.log(res.data);
-      if (res.data.message == 'Password reset successful') {
-        this.toastr.success('Password reset successful');
-        this.cookieService.set('user_data', JSON.stringify(res.data.user));
+      if (res.data.message == 'Password updated successfully') {
+        this.toastr.success('Password updated successfully');
+        // this.cookieService.set('user_data', JSON.stringify(res.data.user));
         setTimeout(() => {
           window.location.reload();
         }, 1000);
