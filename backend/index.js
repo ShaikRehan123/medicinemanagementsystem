@@ -119,9 +119,19 @@ app.post('/forgot_password', (req, res) => {
                         if (err) {
                             console.log(err)
                         }
-                        res.send({
-                            message: 'Password reset successful',
-                        })
+                        // send updated user
+                        connection.query(
+                            `SELECT * FROM users WHERE username = '${username}'`,
+                            (err, result) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                                res.send({
+                                    message: 'Password updated successfully',
+                                    user: result[0],
+                                })
+                            }
+                        )
                     }
                 )
             } else {

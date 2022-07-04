@@ -125,7 +125,10 @@ export class ProfileComponent implements OnInit {
       name: new FormControl(this.user.name),
       city: new FormControl(this.user.city),
       state: new FormControl(this.user.state),
-      mobile: new FormControl(this.user.mobile),
+      mobile: new FormControl(
+        // remove the +91 from the mobile number
+        this.user.mobile.replace(/^\+91/, '')
+      ),
       email: new FormControl(this.user.email),
       question_answer: new FormControl(this.user.question_answer),
     });
