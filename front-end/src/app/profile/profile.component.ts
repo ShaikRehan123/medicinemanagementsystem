@@ -24,6 +24,12 @@ export class ProfileComponent implements OnInit {
   user: any = {};
 
   updateUser = async () => {
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const mobileRegex = /^[0-9]{10}$/;
+    const userNameregex = /^(?=.{8,20}$)[a-zA-Z0-9_]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
     console.log(this.updateUserForm.value);
     if (
       this.updateUserForm.get('username') == null ||
@@ -49,6 +55,30 @@ export class ProfileComponent implements OnInit {
       this.updateUserForm.get('question_answer')?.value.trim() == ''
     ) {
       this.toastr.warning('Please fill all the fields', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (
+      emailRegex.test(this.updateUserForm.get('email')?.value) == false
+    ) {
+      this.toastr.warning('Please enter valid email', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (
+      mobileRegex.test(this.updateUserForm.get('mobile')?.value) == false
+    ) {
+      this.toastr.warning('Please enter valid mobile number', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (
+      userNameregex.test(this.updateUserForm.get('username')?.value) == false
+    ) {
+      this.toastr.warning('Please enter valid username', 'Warning', {
+        timeOut: 4000,
+      });
+    } else if (
+      passwordRegex.test(this.updateUserForm.get('password')?.value) == false
+    ) {
+      this.toastr.warning('Please enter valid password', 'Warning', {
         timeOut: 4000,
       });
     } else {
