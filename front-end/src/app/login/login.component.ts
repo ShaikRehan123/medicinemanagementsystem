@@ -120,8 +120,8 @@ export class LoginComponent implements OnInit {
     this.usermobile = this.registerForm.get('usermobile')?.value;
 
     // if(this.myusername.includes(''))
-    const regex = /^(?=.{8,20}$)[a-zA-Z0-9_]+$/;
-    const pagex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const regex = /^(?=.{3,20}$)[a-zA-Z0-9_]+$/;
+    const pagex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 
     if (
       this.name == null ||
@@ -152,11 +152,11 @@ export class LoginComponent implements OnInit {
         timeOut: 4000,
       });
     } else if (regex.test(this.myusername) == false) {
-      this.toastr.error('Invalid username');
+      this.toastr.error('Username should have min 3 characters');
     } else if (this.usermobile.length != 10) {
       this.toastr.error('Invalid mobile number');
     } else if (pagex.test(this.password) == false) {
-      this.toastr.error('Invalid Password');
+      this.toastr.warning('Password shoud have 1 Capital, 1 Special Character, 1 Number And Min Length Should be 8');
     } else if (this.cpassword !== this.password) {
       this.toastr.error('Password and confirm Password should be same');
     } else {
@@ -222,14 +222,16 @@ export class LoginComponent implements OnInit {
     //   this.forgotusername,
     //   this.forgotpassword
     // );
-
+    const forget_pass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
     if (
       this.forgotsecurityquestion == null ||
       this.forgotusername == null ||
       this.forgotpassword == null
     ) {
       this.toastr.error('you should fill all fields');
-    } else {
+    }else if(forget_pass.test(this.forgotpassword) == false){
+      this.toastr.warning('Password shoud have 1 Capital, 1 Special Character, 1 Number And Min Length Should be 8');
+    }else {
       const res = await axios.post(
         `${environment.apiBaseUrl}/forgot_password`,
         {

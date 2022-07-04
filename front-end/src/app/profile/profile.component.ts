@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const mobileRegex = /^[0-9]{10}$/;
-    const userNameregex = /^(?=.{8,20}$)[a-zA-Z0-9_]+$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const userNameregex = /^(?=.{3,20}$)[a-zA-Z0-9_]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 
     console.log(this.updateUserForm.value);
     if (
@@ -72,13 +72,13 @@ export class ProfileComponent implements OnInit {
     } else if (
       userNameregex.test(this.updateUserForm.get('username')?.value) == false
     ) {
-      this.toastr.warning('Please enter valid username', 'Warning', {
+      this.toastr.warning('Username should have min 3 characters', 'Warning', {
         timeOut: 4000,
       });
     } else if (
       passwordRegex.test(this.updateUserForm.get('password')?.value) == false
     ) {
-      this.toastr.warning('Please enter valid password', 'Warning', {
+      this.toastr.warning('Password shoud have 1 Capital, 1 Special Character, 1 Number And Min Length Should be 8', 'Warning', {
         timeOut: 4000,
       });
     } else {
