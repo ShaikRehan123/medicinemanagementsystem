@@ -2,21 +2,22 @@ html {
   width: 100%;
   height: 100%;
 }
+
 body {
   margin: 0;
 }
+
 .login_wrapper {
-  background: linear-gradient(
-    45deg,
-    rgba(66, 183, 245, 0.8) 0%,
-    rgba(66, 245, 189, 0.4) 100%
-  );
+  background: linear-gradient(45deg,
+      rgba(66, 183, 245, 0.8) 0%,
+      rgba(66, 245, 189, 0.4) 100%);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .login_from {
   color: rgba(0, 0, 0, 0.6);
   font-family: "Roboto", sans-serif;
@@ -54,6 +55,7 @@ body {
   overflow: hidden;
   /* height: 560px !important; */
 }
+
 .form-toggle {
   z-index: 10;
   position: absolute;
@@ -69,6 +71,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 .form-toggle:before,
 .form-toggle:after {
   content: "";
@@ -81,25 +84,31 @@ body {
   background: #4285f4;
   transform: translate(-50%, -50%);
 }
+
 .form-toggle:before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
+
 .form-toggle:after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
+
 .form-toggle.visible {
   transform: translate(0, -25%) scale(1);
   opacity: 1;
 }
+
 .form-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 0 20px;
 }
+
 .form-group:last-child {
   margin: 0;
 }
+
 .form-group label {
   display: block;
   margin: 0 0 10px;
@@ -110,9 +119,11 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
+
 .two .form-group label {
   color: #ffffff;
 }
+
 .form-group input {
   outline: none;
   display: block;
@@ -130,15 +141,19 @@ body {
   transition: 0.3s ease;
   margin-top: 0 !important;
 }
+
 .form-group input:focus {
   color: rgba(0, 0, 0, 0.8);
 }
+
 .two .form-group input {
   color: #ffffff;
 }
+
 .two .form-group input:focus {
   color: #ffffff;
 }
+
 .form-group button {
   outline: none;
   background: #4285f4;
@@ -154,30 +169,36 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
+
 .two .form-group button {
   background: #ffffff;
   color: #4285f4;
 }
+
 .form-group .form-remember {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
 }
+
 .form-group .form-remember input[type="checkbox"] {
   display: inline-block;
   width: auto;
   margin: 0 10px 0 0;
 }
+
 .form-group .form-recovery {
   color: #4285f4;
   font-size: 12px;
   text-decoration: none;
 }
+
 .form-panel {
   padding: 60px calc(5% + 60px) 60px 60px;
   box-sizing: border-box;
 }
+
 .form-panel.one:before {
   content: "";
   display: block;
@@ -185,6 +206,7 @@ body {
   visibility: hidden;
   transition: 0.3s ease;
 }
+
 .form-panel.one.hidden:before {
   display: block;
   opacity: 1;
@@ -194,6 +216,7 @@ body {
 .form-header {
   margin: 0 0 40px;
 }
+
 .form-header h1 {
   padding: 4px 0;
   color: #4285f4;
@@ -201,11 +224,13 @@ body {
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .two .form-header h1 {
   position: relative;
   z-index: 40;
   color: #ffffff;
 }
+
 .pen-footer {
   display: flex;
   flex-direction: row;
@@ -213,12 +238,14 @@ body {
   width: 600px;
   margin: 20px auto 100px;
 }
+
 .pen-footer a {
   color: #ffffff;
   font-size: 12px;
   text-decoration: none;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
+
 .pen-footer a .material-icons {
   width: 12px;
   margin: 0 5px;
@@ -243,6 +270,7 @@ body {
   transition: 0.3s ease;
   cursor: pointer;
 }
+
 .form-panel.three {
   z-index: 6;
   position: absolute;
@@ -254,11 +282,13 @@ body {
   transition: 0.3s ease;
   cursor: pointer;
 }
+
 .form-panel.three.active {
-  top: 0%;
+  top: -9%;
   box-shadow: 0 0 10px rgb(0 0 0 / 20%);
   cursor: default;
 }
+
 .form-panel.two:before,
 .form-panel.two:after {
   content: "";
@@ -271,9 +301,11 @@ body {
   width: 2px;
   transition: 0.3s ease;
 }
+
 .form-panel.two:after {
   left: 3%;
 }
+
 /* .form-panel.two:hover {
   left: 93%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -282,12 +314,25 @@ body {
 .form-panel.two:hover:after {
   opacity: 0.8;
 }
+
 .form-panel.two.active {
   left: 5%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: default;
 }
+
 .form-panel.two.active:before,
 .form-panel.two.active:after {
   opacity: 0;
+}
+
+.form-panel.three.active,
+.form-panel.three.active .form-group label,
+.form-panel.three.active .form-group input {
+  color: white;
+}
+
+.form-panel.three.active .form-group button{
+  background: white;
+  color: black;
 }
