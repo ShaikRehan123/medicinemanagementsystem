@@ -38,13 +38,13 @@
   transition: all 0.3s ease-in;
 }
 
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover > .dropdown-menu {
   transform: scaleY(1);
   opacity: 1;
   visibility: visible;
 }
 
-.dropdown-submenu:hover>.dropdown-menu {
+.dropdown-submenu:hover > .dropdown-menu {
   transform: scaleY(1);
   opacity: 1;
   visibility: visible;
@@ -127,4 +127,7 @@
 a {
   cursor: pointer !important;
   outline: none !important;
+}
+span svg {
+  width: 15px;
 }

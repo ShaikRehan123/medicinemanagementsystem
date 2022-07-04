@@ -572,6 +572,65 @@ app.get('/show_report', (req, res) => {
     )
 })
 
+// edit profile - user, ngo
+app.post('/edit_profile', (req, res) => {
+    const {
+        userID,
+        username,
+        name,
+        email,
+        city,
+        state,
+        mobile,
+        password,
+        security_question,
+    } = req.body
+    connection.query(
+        `UPDATE users SET name = ?,username = ?, email = ?, city = ?, state = ?, mobile = ?, password = ?, question_answer = ? WHERE id = ?`,
+        [
+            name,
+            username,
+            email,
+            city,
+            state,
+            mobile,
+            password,
+            security_question,
+            userID,
+        ],
+        (err) => {
+            if (err) {
+                console.log(err)
+                res.send({
+                    message: 'Error in editing profile',
+                })
+                return
+            } else {
+                //    send back the updated user details
+                connection.query(
+                    `SELECT * FROM users WHERE id = ?`,
+                    [userID],
+                    (err, result) => {
+                        if (err) {
+                            console.log(err)
+                            res.send({
+                                message: 'Error in editing profile',
+                            })
+                            return
+                        }
+
+                        res.send({
+                            message: 'Profile updated successfully',
+                            user: result[0],
+                        })
+                    }
+                )
+                return
+            }
+        }
+    )
+})
+
 app.listen(PORT, (err) => {
     if (err) {
         console.log(err)
